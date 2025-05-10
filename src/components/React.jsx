@@ -7,9 +7,8 @@ export default function ReactComponent() {
     <div className="border border-gray-200 rounded-lg p-4">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         React Component
-      </h2>
-      <p className="text-gray-600 mb-4">
-        This component demonstrates React with Tailwind CSS v4 styling inside an
+      </h2>      <p className="text-gray-600 mb-4">
+        This component demonstrates React with Tailwind CSS styling inside an
         Astro project.
       </p>
       <div className="flex items-center gap-4">
