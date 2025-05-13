@@ -1,0 +1,21 @@
+---
+---
+<div class="px-3 py-1 h-full mt-1 bg-gradient-to-b from-[#34aef0] to-[#1e4eb3] border border-[#4a7ee8] shadow-inner">
+  <span id="xp-clock" class="text-white text-xs font-mono drop-shadow-sm select-none"></span>
+</div>
+
+<script>
+  function updateClock() {
+    const el = document.getElementById('xp-clock');
+    if (!el) return;
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    el.textContent = `${hours}:${minutes} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script> 

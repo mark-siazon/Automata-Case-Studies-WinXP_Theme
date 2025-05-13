@@ -1,0 +1,55 @@
+---
+// src/components/home/Taskbar.astro
+import StartButton from "./StartButton.astro";
+import Clock from "./Clock.astro";
+
+const { icon_computer = "/xp-icon/computer.ico", label = "Computer" } =
+  Astro.props;
+
+const taskbarButtons = [
+  { icon: "/xp-icon/computer.ico", label: "Computer" },
+  { icon: "/xp-icon/help.ico", label: "Help" },
+  // Add more buttons here!
+];
+---
+
+<div
+  class="fixed bottom-0 left-0 right-0 h-10 bg-gradient-to-b from-[#245edc] to-[#1e4eb3] border-t border-[#4a7ee8] flex items-center z-50"
+>
+  <StartButton />
+  <!-- Quick Launch -->
+  <div class="flex items-center gap-2 ml-4">
+    <!-- Help -->
+    <div class="w-5 h-4 flex items-center justify-center">
+      <img src="/xp-icon/help.ico" alt="My Computer" class="w-full" />
+    </div>
+    <!-- IE -->
+    <div class="w-5 h-4 flex items-center justify-center">
+      <img src="/xp-icon/ie.ico" alt="IE" class="w-4 h-4" />
+    </div>
+    <!-- My Computer -->
+    <button
+      class="flex items-center px-4 py-1
+    bg-gradient-to-b from-[#7ec6fa] to-[#3b6eb1]
+    border border-[#2056a5]
+    rounded-lg
+    shadow-[inset_0_1px_0_0_#fff,0_1px_2px_#2056a5]
+    focus:outline-none
+    active:translate-y-px
+    min-w-[120px]
+    max-w-xs"
+      style="box-shadow: 0 1px 0 0 #fff inset, 0 1px 2px #2056a5;"
+    >
+      <img src={icon_computer} alt="" class="w-4 h-4 mr-2 drop-shadow" />
+      <span
+        class="text-white font-medium text-sm drop-shadow-[0_1px_0_#2056a5]"
+      >
+        {label}
+      </span>
+    </button>
+
+    <!-- Taskbar Buttons -->
+  </div>
+  <div class="flex-1"></div>
+  <Clock />
+</div>
