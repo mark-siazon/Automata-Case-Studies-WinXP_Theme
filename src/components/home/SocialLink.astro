@@ -1,0 +1,32 @@
+---
+interface Props {
+  icon: string;
+  username: string;
+  url: string;
+}
+
+const { icon, username, url } = Astro.props;
+---
+
+<li
+  class="flex items-center gap-2 px-2 py-1.5 rounded cursor-pointer group relative hover:bg-blue-200 transition-all duration-200"
+>
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center gap-2 w-full"
+  >
+    <img src={`/xp-icon/${icon}.ico`} class="w-5 h-5" alt={icon} />
+    <span>@{username}</span>
+  </a>
+  <div
+    class="fixed bg-[#245edc] text-white px-3 py-1.5 rounded text-sm opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap pointer-events-none z-[99999] shadow-lg border border-[#4ea3f7] [transform:translate(-50%,-120%)] group-hover:[transform:translate(-50%,-130%)]"
+  >
+    Visit {username}'s {icon === "github" ? "GitHub" : "LinkedIn"} profile
+    <div
+      class="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 rotate-45 w-2 h-2 bg-[#245edc] border-r border-b border-[#4ea3f7]"
+    >
+    </div>
+  </div>
+</li>
