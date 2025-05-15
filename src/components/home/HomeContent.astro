@@ -1,22 +1,13 @@
 ---
-import Window from './Window.astro';
+import Win_Title_CaseStudy from "../../pages/windows/win_Title-CaseStudy.astro";
+import Win_Authors from "../../pages/windows/win_Authors.astro";
+import Win_Fibonacci from "../../pages/windows/win_Fibonacci.astro";
 ---
 
-<article class="flex flex-col justify-center items-center gap-8 p-4 sm:p-8 w-full max-w-[600px]">
-  <Window title="Case Study Compilation">
-    <h1 class="text-2xl sm:text-4xl font-bold text-[#0054e3]">Case Study Compilation</h1>
-    <h2 class="text-xl sm:text-2xl font-semibold text-[#1e4eb3]">AUTOMATA Theory</h2>
-    <p class="text-sm sm:text-base text-[#2c3e50]">
-      Submitted to: <strong class="font-semibold">Prof. Lester Diampoc</strong>
-    </p>
-  </Window>
-  <Window title="Authors">
-    <h3 class="sr-only">Authors</h3>
-    <ul class="flex flex-col sm:flex-row gap-2 sm:gap-6 list-none text-[#2c3e50] text-sm sm:text-base">
-      <li class="font-semibold">Coded by III-ACSAD:</li>
-      <li class="hover:text-[#0054e3] transition-colors cursor-pointer hover:underline">Baluyut</li>
-      <li class="hover:text-[#0054e3] transition-colors cursor-pointer hover:underline">Siazon</li>
-      <li class="hover:text-[#0054e3] transition-colors cursor-pointer hover:underline">Villarosa</li>
-    </ul>
-  </Window>
-</article> 
+<article
+  class="flex flex-col justify-center items-center gap-8 p-4 sm:p-8 w-full max-w-[600px]"
+>
+  <Win_Title_CaseStudy />
+  <Win_Authors />
+  <Win_Fibonacci />
+</article>
