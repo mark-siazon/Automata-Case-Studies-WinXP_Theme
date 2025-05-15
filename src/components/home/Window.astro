@@ -1,4 +1,5 @@
 ---
+// Window component props interface
 export interface Props {
   title: string;
   id: string;
@@ -7,6 +8,7 @@ export interface Props {
   canClose?: boolean;
 }
 
+// Default props with optional controls
 const {
   title,
   id,
@@ -16,18 +18,20 @@ const {
 } = Astro.props;
 ---
 
+<!-- Main window container with Windows XP-like styling -->
 <section
   id={id}
-  class="flex flex-col justify-center items-center gap-3 text-center py-4 sm:py-8 w-full bg-gradient-to-b from-[#ece9d8] to-[#d4d0c8] border-2 border-[#0054e3] shadow-[4px_4px_0px_rgba(0,0,0,0.1)] transition-all duration-200"
+  class="flex flex-col justify-center items-center gap-3 text-center py-4 sm:py-8 w-full bg-gradient-to-b from-[#ece9d8] to-[#d4d0c8] border-2 border-[#0054e3] shadow-[4px_4px_0px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out"
 >
-  <!-- Window Title Bar -->
+  <!-- Title bar with gradient background and window controls -->
   <div
-    class="w-full h-6 bg-gradient-to-r from-[#0054e3] to-[#3a7ee8] -mt-4 sm:-mt-8 -mx-4 sm:-mx-8 mb-4 flex items-center px-2 justify-between"
+    class="w-full h-6 bg-gradient-to-r from-[#0054e3] to-[#3a7ee8] -mt-4 sm:-mt-8 -mx-4 sm:-mx-8 mb-4 flex items-center px-2 justify-between cursor-move"
   >
     <span class="text-white text-sm ml-2 font-medium">{title}</span>
 
+    <!-- Window control buttons container -->
     <div class="flex gap-1 ml-auto">
-      <!-- Minimize -->
+      <!-- Minimize button -->
       {
         canMinimize && (
           <button
@@ -55,12 +59,12 @@ const {
           </button>
         )
       }
-      <!-- Maximize -->
+      <!-- Maximize button -->
       {
         canMaximize && (
           <button
             class="maximize-btn cursor-pointer w-4 h-4 flex items-center justify-center bg-gradient-to-b from-[#b5d3f3] to-[#b5d3f3] border border-[#3a6ea5] rounded-[2px] shadow-inner active:translate-y-px"
-            onclick={`document.getElementById('${id}').classList.toggle('maximized')`}
+            onclick={`window.windowManager.toggleMaximize(document.getElementById('${id}'))`}
           >
             <svg
               width="14"
@@ -83,7 +87,7 @@ const {
           </button>
         )
       }
-      <!-- Close -->
+      <!-- Close button -->
       {
         canClose && (
           <button
@@ -125,13 +129,13 @@ const {
 </section>
 
 <style>
-  /* Minimize animation */
+  /* Minimize animation - slides window to bottom of screen */
   .minimized {
     transform: translateY(calc(100vh - 2rem));
     opacity: 0.5;
   }
 
-  /* Maximize animation */
+  /* Maximize animation - makes window fullscreen */
   .maximized {
     position: fixed !important;
     top: 0 !important;
@@ -141,71 +145,122 @@ const {
     width: 100vw !important;
     height: 100vh !important;
     margin: 0 !important;
-    z-index: 100 !important;
+    z-index: 9999 !important;
     transform: none !important;
   }
 
-  /* Restore button when maximized */
+  /* Restore button rotation when window is maximized */
   .maximized .maximize-btn svg {
     transform: rotate(180deg);
   }
 
-  /* Transition for all window states */
-  section {
-    transition: all 0.3s ease-in-out;
+  /* Smooth dragging transition */
+  .dragging {
+    transition: none !important;
+    cursor: move !important;
+    user-select: none !important;
+  }
+
+  /* Resize handles */
+  .resize-handle {
+    position: absolute;
+    background: transparent;
+    z-index: 1000;
+  }
+
+  /* Hide resize handles when maximized */
+  .maximized .resize-handle {
+    display: none;
+  }
+
+  /* North handle */
+  .resize-handle-n {
+    top: -4px;
+    left: 4px;
+    right: 4px;
+    height: 8px;
+  }
+
+  /* East handle */
+  .resize-handle-e {
+    top: 4px;
+    right: -4px;
+    bottom: 4px;
+    width: 8px;
+  }
+
+  /* South handle */
+  .resize-handle-s {
+    bottom: -4px;
+    left: 4px;
+    right: 4px;
+    height: 8px;
+  }
+
+  /* West handle */
+  .resize-handle-w {
+    top: 4px;
+    left: -4px;
+    bottom: 4px;
+    width: 8px;
+  }
+
+  /* Northeast handle */
+  .resize-handle-ne {
+    top: -4px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Northwest handle */
+  .resize-handle-nw {
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Southeast handle */
+  .resize-handle-se {
+    bottom: -4px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Southwest handle */
+  .resize-handle-sw {
+    bottom: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Resizing state */
+  .resizing {
+    transition: none !important;
+    user-select: none !important;
   }
 </style>
 
 <script>
-  // Make window draggable
-  function makeDraggable(windowId: string) {
-    const window = document.getElementById(windowId);
-    const titleBar = window?.querySelector(".bg-gradient-to-r");
-    if (!window || !titleBar) return;
+  import { WindowManager } from "./Window/windowManager";
 
-    let isDragging = false;
-    let currentX: number = 0;
-    let currentY: number = 0;
-    let initialX: number = 0;
-    let initialY: number = 0;
-    let xOffset = 0;
-    let yOffset = 0;
+  // Create window manager instance and make it globally accessible
+  const windowManager = new WindowManager();
+  (window as any).windowManager = windowManager;
 
-    titleBar.addEventListener("mousedown", (e: MouseEvent) => {
-      if (window.classList.contains("maximized")) return;
-      initialX = e.clientX - xOffset;
-      initialY = e.clientY - yOffset;
-      isDragging = true;
-    });
-
-    document.addEventListener("mousemove", (e: MouseEvent) => {
-      if (isDragging && !window.classList.contains("maximized")) {
-        e.preventDefault();
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-        xOffset = currentX;
-        yOffset = currentY;
-        window.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      }
-    });
-
-    document.addEventListener("mouseup", () => {
-      isDragging = false;
-    });
-
-    // Double click title bar to maximize/restore
-    titleBar.addEventListener("dblclick", () => {
-      if (window.querySelector(".maximize-btn")) {
-        window.classList.toggle("maximized");
-      }
-    });
-  }
-
-  // Initialize draggable for all windows
+  // Initialize draggable functionality for all windows
   document.addEventListener("DOMContentLoaded", () => {
     const windows = document.querySelectorAll('[id$="-window"]');
     windows.forEach((window) => {
-      makeDraggable(window.id);
+      windowManager.initWindow(window.id);
+    });
+
+    // Update snap points when window is resized
+    window.addEventListener("resize", () => {
+      windowManager.updateSnapPoints();
     });
   });
 </script>
