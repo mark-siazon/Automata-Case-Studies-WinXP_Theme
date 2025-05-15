@@ -129,10 +129,15 @@ const {
 </section>
 
 <style>
-  /* Minimize animation - slides window to bottom of screen */
+  /* Minimize animation - slides window to bottom-left of screen */
   .minimized {
-    transform: translateY(calc(100vh - 2rem));
-    opacity: 0.5;
+    transform: translate(-80vw, 80vh) scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .minimized-hidden {
+    display: none !important;
   }
 
   /* Maximize animation - makes window fullscreen */

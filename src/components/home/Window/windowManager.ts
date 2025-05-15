@@ -134,16 +134,7 @@ export class WindowManager {
     if (!state.isMinimized) {
       // Store original state and minimize
       state.originalTransform = window.style.transform;
-      state.originalOpacity = window.style.opacity;
       state.wasMaximized = window.classList.contains("maximized");
-
-      // Add Windows XP-style transition classes
-      window.classList.add(
-        "transition-all",
-        "duration-300",
-        "ease-in-out",
-        "transform-gpu"
-      );
 
       // If window was maximized, restore it first
       if (state.wasMaximized) {
@@ -151,66 +142,30 @@ export class WindowManager {
         window.style.transform = `translate(${state.xOffset}px, ${state.yOffset}px)`;
       }
 
-      // Minimize window with Windows XP-style animation
-      window.style.transform = `translate(${state.xOffset}px, calc(100vh - 2rem)) scale(0.95)`;
-      window.style.opacity = "0.5";
-      state.isMinimized = true;
-
-      // Add to minimized windows map
-      this.minimizedWindows.set(state.windowId, state);
-
-      // Add to taskbar with Windows XP-style button
-      this.addToTaskbar(state);
-
-      // Remove transition class after animation
+      // Animate to bottom-left
+      window.classList.add("minimized");
       setTimeout(() => {
-        window.classList.remove(
-          "transition-all",
-          "duration-300",
-          "ease-in-out",
-          "transform-gpu"
-        );
-      }, 300);
+        window.classList.add("minimized-hidden");
+      }, 300); // match transition duration
+
+      state.isMinimized = true;
+      this.minimizedWindows.set(state.windowId, state);
+      this.addToTaskbar(state);
     } else {
-      // Add Windows XP-style transition classes
-      window.classList.add(
-        "transition-all",
-        "duration-300",
-        "ease-in-out",
-        "transform-gpu"
-      );
+      // Restore window
+      window.classList.remove("minimized-hidden");
+      setTimeout(() => {
+        window.classList.remove("minimized");
+      }, 10); // allow reflow
 
-      // Restore window with Windows XP-style animation
-      window.style.transform =
-        state.originalTransform ||
-        `translate(${state.xOffset}px, ${state.yOffset}px) scale(1)`;
-      window.style.opacity = state.originalOpacity || "1";
       state.isMinimized = false;
-
-      // Restore maximized state if it was maximized before
       if (state.wasMaximized) {
         window.classList.add("maximized");
         window.style.transform = "none";
       }
-
-      // Remove from minimized windows map
       this.minimizedWindows.delete(state.windowId);
-
-      // Remove from taskbar
       this.removeFromTaskbar(state.windowId);
-
-      // Bring window to front when restoring
       this.bringToFront(window);
-
-      // Remove transition class after animation
-      setTimeout(() => {
-        window.classList.remove(
-          "transition-all",
-          "duration-300",
-          "ease-in-out",
-          "transform-gpu"
-        );
-      }, 300);
     }
   }
 
