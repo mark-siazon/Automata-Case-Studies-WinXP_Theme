@@ -7,6 +7,12 @@ interface WindowState {
   initialY: number;
   xOffset: number;
   yOffset: number;
+  isMinimized: boolean;
+  originalTransform: string;
+  originalOpacity: string;
+  windowId: string;
+  title: string;
+  wasMaximized: boolean;
 }
 
 // Window snapping configuration
@@ -31,6 +37,7 @@ export class WindowManager {
       right: window.innerWidth,
     },
   };
+  private minimizedWindows: Map<string, WindowState> = new Map();
 
   // Initialize window dragging and controls
   public initWindow(windowId: string): void {
@@ -46,12 +53,18 @@ export class WindowManager {
       initialY: 0,
       xOffset: 0,
       yOffset: 0,
+      isMinimized: false,
+      originalTransform: window.style.transform,
+      originalOpacity: window.style.opacity,
+      windowId,
+      title: window.querySelector(".window-title")?.textContent || windowId,
+      wasMaximized: false,
     };
 
     // Start dragging on mousedown
     titleBar.addEventListener("mousedown", ((e: Event) => {
       const mouseEvent = e as MouseEvent;
-      if (window.classList.contains("maximized")) return;
+      if (window.classList.contains("maximized") || state.isMinimized) return;
 
       window.classList.add("dragging");
       state.initialX = mouseEvent.clientX - state.xOffset;
@@ -63,7 +76,11 @@ export class WindowManager {
     // Update window position while dragging
     document.addEventListener("mousemove", ((e: Event) => {
       const mouseEvent = e as MouseEvent;
-      if (state.isDragging && !window.classList.contains("maximized")) {
+      if (
+        state.isDragging &&
+        !window.classList.contains("maximized") &&
+        !state.isMinimized
+      ) {
         e.preventDefault();
 
         state.currentX = mouseEvent.clientX - state.initialX;
@@ -98,10 +115,167 @@ export class WindowManager {
 
     // Bring window to front when clicking anywhere
     window.addEventListener("mousedown", (() => {
-      if (!window.classList.contains("maximized")) {
+      if (!window.classList.contains("maximized") && !state.isMinimized) {
         this.bringToFront(window);
       }
     }) as EventListener);
+
+    // Initialize minimize button
+    const minimizeBtn = window.querySelector(".minimize-btn");
+    if (minimizeBtn) {
+      minimizeBtn.addEventListener("click", () => {
+        this.toggleMinimize(window, state);
+      });
+    }
+  }
+
+  // Toggle window minimize state
+  private toggleMinimize(window: HTMLElement, state: WindowState): void {
+    if (!state.isMinimized) {
+      // Store original state and minimize
+      state.originalTransform = window.style.transform;
+      state.originalOpacity = window.style.opacity;
+      state.wasMaximized = window.classList.contains("maximized");
+
+      // Add Windows XP-style transition classes
+      window.classList.add(
+        "transition-all",
+        "duration-300",
+        "ease-in-out",
+        "transform-gpu"
+      );
+
+      // If window was maximized, restore it first
+      if (state.wasMaximized) {
+        window.classList.remove("maximized");
+        window.style.transform = `translate(${state.xOffset}px, ${state.yOffset}px)`;
+      }
+
+      // Minimize window with Windows XP-style animation
+      window.style.transform = `translate(${state.xOffset}px, calc(100vh - 2rem)) scale(0.95)`;
+      window.style.opacity = "0.5";
+      state.isMinimized = true;
+
+      // Add to minimized windows map
+      this.minimizedWindows.set(state.windowId, state);
+
+      // Add to taskbar with Windows XP-style button
+      this.addToTaskbar(state);
+
+      // Remove transition class after animation
+      setTimeout(() => {
+        window.classList.remove(
+          "transition-all",
+          "duration-300",
+          "ease-in-out",
+          "transform-gpu"
+        );
+      }, 300);
+    } else {
+      // Add Windows XP-style transition classes
+      window.classList.add(
+        "transition-all",
+        "duration-300",
+        "ease-in-out",
+        "transform-gpu"
+      );
+
+      // Restore window with Windows XP-style animation
+      window.style.transform =
+        state.originalTransform ||
+        `translate(${state.xOffset}px, ${state.yOffset}px) scale(1)`;
+      window.style.opacity = state.originalOpacity || "1";
+      state.isMinimized = false;
+
+      // Restore maximized state if it was maximized before
+      if (state.wasMaximized) {
+        window.classList.add("maximized");
+        window.style.transform = "none";
+      }
+
+      // Remove from minimized windows map
+      this.minimizedWindows.delete(state.windowId);
+
+      // Remove from taskbar
+      this.removeFromTaskbar(state.windowId);
+
+      // Bring window to front when restoring
+      this.bringToFront(window);
+
+      // Remove transition class after animation
+      setTimeout(() => {
+        window.classList.remove(
+          "transition-all",
+          "duration-300",
+          "ease-in-out",
+          "transform-gpu"
+        );
+      }, 300);
+    }
+  }
+
+  // Add window to taskbar
+  private addToTaskbar(state: WindowState): void {
+    const taskbarButtonsContainer = document.querySelector(
+      ".taskbar-buttons-container"
+    );
+    if (!taskbarButtonsContainer) return;
+
+    // Check if button already exists
+    const existingButton = document.querySelector(
+      `.taskbar-button[data-window-id="${state.windowId}"]`
+    );
+    if (existingButton) return;
+
+    const button = document.createElement("button");
+    button.className = `
+      flex items-center px-4 py-1
+      bg-gradient-to-b from-[#7ec6fa] to-[#3b6eb1]
+      border border-[#2056a5]
+      rounded-lg
+      shadow-[inset_0_1px_0_0_#fff,0_1px_2px_#2056a5]
+      focus:outline-none
+      active:translate-y-px
+      min-w-[120px]
+      max-w-xs
+      taskbar-button
+      ml-2
+      transition-all
+      duration-150
+      ease-in-out
+      hover:from-[#8ed1fb]
+      hover:to-[#4b7ec2]
+      active:from-[#6ebbf9]
+      active:to-[#2b5ea0]
+    `;
+    button.dataset.windowId = state.windowId;
+    button.innerHTML = `
+      <span class="text-white font-medium text-sm drop-shadow-[0_1px_0_#2056a5]">
+        ${state.title}
+      </span>
+    `;
+
+    button.addEventListener("click", () => {
+      const window = document.getElementById(state.windowId);
+      if (window) {
+        const currentState = this.minimizedWindows.get(state.windowId);
+        if (currentState) {
+          this.toggleMinimize(window, currentState);
+        }
+      }
+    });
+
+    taskbarButtonsContainer.appendChild(button);
+  }
+
+  // Remove window from taskbar
+  private removeFromTaskbar(windowId: string): void {
+    const button = document.querySelector(
+      `.taskbar-button[data-window-id="${windowId}"]`
+    );
+    if (button) {
+      button.remove();
+    }
   }
 
   // Bring window to front
