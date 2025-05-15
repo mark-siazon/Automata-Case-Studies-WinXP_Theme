@@ -5,5 +5,31 @@ import StartMenu from "./StartMenu.astro";
 
 <div class="min-h-screen bg-[#245edc] relative">
   <Taskbar />
-  <StartMenu open={false} />
+  <StartMenu />
 </div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const startBtn = document.getElementById("xp-start-btn");
+    const startMenu = document.getElementById("xp-start-menu");
+
+    function closeMenu(e) {
+      if (
+        startMenu &&
+        !startMenu.classList.contains("hidden") &&
+        !startMenu.contains(e.target) &&
+        e.target !== startBtn
+      ) {
+        startMenu.classList.add("hidden");
+      }
+    }
+
+    startBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      startMenu?.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", closeMenu);
+    window.addEventListener("blur", () => startMenu?.classList.add("hidden"));
+  });
+</script>

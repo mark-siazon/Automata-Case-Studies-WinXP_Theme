@@ -29,37 +29,37 @@ import SocialLink from "./SocialLink.astro";
         <li
           class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
         >
-          <a
-            href="/fibonacci"
-            data-astro-reload="false"
-            class="flex items-center gap-2 w-full h-full"
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'fibonacci' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
           >
             <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" alt="Paint" />
             <span>Fibonacci Sequence Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
-          </a>
+          </button>
         </li>
         <li
           class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
         >
-          <a
-            href="/tribonacci"
-            data-astro-reload="false"
-            class="flex items-center gap-2 w-full h-full"
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'tribonacci' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
           >
             <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" alt="Paint 3D" />
             <span>Tribonacci Sequence Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
-          </a>
+          </button>
         </li>
         <li class="border-t w-9/12 mx-auto border-blue-800/60 my-1"></li>
         <li
           class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
         >
-          <a
-            href="/euclidean"
-            data-astro-reload="false"
-            class="flex items-center gap-2 w-full h-full"
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'euclidean' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
           >
             <img
               src="/xp-icon/page-euclidean.ico"
@@ -68,28 +68,28 @@ import SocialLink from "./SocialLink.astro";
             />
             <span>Euclidean Algorithm</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
-          </a>
+          </button>
         </li>
         <li
           class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
         >
-          <a
-            href="/lucas"
-            data-astro-reload="false"
-            class="flex items-center gap-2 w-full h-full"
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'lucas' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
           >
             <img src="/xp-icon/page-lucas.ico" class="w-5 h-5" alt="Word" />
             <span>Lucas Number Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
-          </a>
+          </button>
         </li>
         <li
           class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
         >
-          <a
-            href="/bernoulli"
-            data-astro-reload="false"
-            class="flex items-center gap-2 w-full h-full"
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'bernoulli' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
           >
             <img
               src="/xp-icon/page-bernoulli.ico"
@@ -98,7 +98,7 @@ import SocialLink from "./SocialLink.astro";
             />
             <span>Bernoulli Number Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
