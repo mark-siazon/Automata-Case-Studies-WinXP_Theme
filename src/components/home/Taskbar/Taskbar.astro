@@ -3,14 +3,12 @@
 import StartButton from "./StartButton.astro";
 import Clock from "./Clock.astro";
 
-const {
-  icon_computer = "/Case-Studies-Automata/xp-icon/computer.ico",
-  label = "Computer",
-} = Astro.props;
+const { icon_computer = "/xp-icon/computer.ico", label = "Computer" } =
+  Astro.props;
 
 const taskbarButtons = [
-  { icon: "/Case-Studies-Automata/xp-icon/computer.ico", label: "Computer" },
-  { icon: "/Case-Studies-Automata/xp-icon/help.ico", label: "Help" },
+  { icon: "/xp-icon/computer.ico", label: "Computer" },
+  { icon: "/xp-icon/help.ico", label: "Help" },
   // Add more buttons here!
 ];
 ---
@@ -23,19 +21,11 @@ const taskbarButtons = [
   <div class="flex items-center gap-2 ml-4">
     <!-- Help -->
     <div class="w-5 h-4 flex items-center justify-center">
-      <img
-        src="/Case-Studies-Automata/xp-icon/help.ico"
-        alt="My Computer"
-        class="w-full"
-      />
+      <img src="/xp-icon/help.ico" alt="My Computer" class="w-full" />
     </div>
     <!-- IE -->
     <div class="w-5 h-4 flex items-center justify-center">
-      <img
-        src="/Case-Studies-Automata/xp-icon/ie.ico"
-        alt="IE"
-        class="w-4 h-4"
-      />
+      <img src="/xp-icon/ie.ico" alt="IE" class="w-4 h-4" />
     </div>
     <!-- My Computer -->
     <button
