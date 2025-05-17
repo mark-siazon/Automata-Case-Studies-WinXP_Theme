@@ -27,7 +27,7 @@ interface SnapConfig {
 }
 
 export class WindowManager {
-  private maxZIndex: number = 100;
+  private maxZIndex: number = 10;
   private snapConfig: SnapConfig = {
     threshold: 20, // pixels from edge to trigger snap
     snapPoints: {
