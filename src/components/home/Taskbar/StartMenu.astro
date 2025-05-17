@@ -5,7 +5,7 @@ import SocialLink from "./SocialLink.astro";
 <div
   id="xp-start-menu"
   tabindex="-1"
-  class="hidden-remove fixed bottom-10 left-0 w-[400px] bg-[#eaf6ff] border border-[#245edc] rounded-t-xl rounded-br-xl shadow-2xl z-50 flex-col overflow-hidden font-sans animate-fade"
+  class="hidden-remove fixed bottom-10 left-0 w-[450px] bg-[#eaf6ff] border border-[#245edc] rounded-t-xl rounded-br-xl shadow-2xl z-50 flex-col overflow-hidden font-sans animate-fade"
   style="box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);"
 >
   <!-- User/Profile Section -->
@@ -97,6 +97,23 @@ import SocialLink from "./SocialLink.astro";
               alt="Notepad"
             />
             <span>Bernoulli Number Generator</span>
+            <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
+          </button>
+        </li>
+        <li
+          class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
+        >
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'pascal' }))"
+            class="flex items-center gap-2 w-full h-full text-left"
+          >
+            <img
+              src="/xp-icon/page-bernoulli.ico"
+              class="w-5 h-5"
+              alt="Notepad"
+            />
+            <span>Pascal Triangle Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
           </button>
         </li>
