@@ -1,0 +1,58 @@
+/* src/styles/exer.pascal.module.css */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pascalContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  /* window‐scoped gradient */
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+
+  font-family: "Playfair Display", serif;
+  color: #333;
+  padding: 1rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.triangleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.footerCard {
+  position: absolute;
+  top: 0.5rem;
+  left: 20%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(325, 57%, 36%);
+  box-shadow: 0 -4px 24px rgba(255, 154, 158, 0.18);
+  letter-spacing: 0.04em;
+}
