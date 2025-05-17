@@ -10,16 +10,18 @@ const TitleWindow: React.FC = () => (
     canMaximize={false}
     canClose
   >
-    <h1 className="text-2xl sm:text-4xl font-bold text-[#0054e3]">
-      Case Study Compilation
-    </h1>
-    <h2 className="text-xl sm:text-2xl font-semibold text-[#1e4eb3]">
-      AUTOMATA Theory
-    </h2>
-    <p className="text-sm sm:text-base text-[#2c3e50]">
-      Submitted to:{" "}
-      <strong className="font-semibold">Prof. Lester Diampoc</strong>
-    </p>
+    <div className="my-4">
+      <h1 className="text-2xl sm:text-4xl font-bold text-[#0054e3]">
+        Case Study Compilation
+      </h1>
+      <h2 className="text-xl sm:text-2xl font-semibold text-[#1e4eb3]">
+        AUTOMATA Theory
+      </h2>
+      <p className="text-sm sm:text-base text-[#2c3e50]">
+        Submitted to:{" "}
+        <strong className="font-semibold">Prof. Lester Diampoc</strong>
+      </p>
+    </div>
   </Window>
 );
 
