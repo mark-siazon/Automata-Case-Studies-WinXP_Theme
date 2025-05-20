@@ -12,6 +12,9 @@ export type WindowProps = {
   canMaximize?: boolean;
   canClose?: boolean;
   children?: React.ReactNode;
+  onMinimize?: () => void;
+  onMaximize?: (isMaximized: boolean) => void;
+  onClose?: () => void;
 };
 
 const Window: React.FC<WindowProps> = ({
@@ -21,6 +24,9 @@ const Window: React.FC<WindowProps> = ({
   canMaximize = true,
   canClose = true,
   children,
+  onMinimize,
+  onMaximize,
+  onClose,
 }) => {
   const windowRef = useRef<HTMLDivElement>(null);
   const wmRef = useRef<WindowManager | null>(null);
@@ -43,10 +49,23 @@ const Window: React.FC<WindowProps> = ({
     return () => window.removeEventListener("resize", onResize);
   }, [id]);
 
-  const minimize = () => windowRef.current?.classList.add("minimized");
-  const maximize = () =>
-    windowRef.current && wmRef.current?.toggleMaximize(windowRef.current);
-  const closeWindow = () => windowRef.current?.classList.add("hidden");
+  const minimize = () => {
+    windowRef.current?.classList.add("minimized");
+    if (onMinimize) onMinimize();
+  };
+  const maximize = () => {
+    if (windowRef.current && wmRef.current) {
+      wmRef.current.toggleMaximize(windowRef.current);
+      const isMaximized = windowRef.current.classList.contains("maximized");
+      if (onMaximize) onMaximize(isMaximized);
+    } else {
+      if (onMaximize) onMaximize(false);
+    }
+  };
+  const closeWindow = () => {
+    windowRef.current?.classList.add("hidden");
+    if (onClose) onClose();
+  };
 
   return (
     <section
