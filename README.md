@@ -1,15 +1,15 @@
 # Acads Case Studies Automata
 
-This project is a **Windows XP–style desktop** web application built with **Astro**, **React**, and **Tailwind CSS v4**. It runs as a static front-end with **dynamic React islands**, and is deployed via **Vercel Serverless** for zero‑config CI/CD.
+This project is a **Windows XP–style desktop** web application built with **Astro**, **React**, and **Tailwind CSS v4**. It runs as a server-side rendered application with **dynamic React islands**, and is deployed via **Vercel** for zero‑config CI/CD.
 
 ## 🚀 Tech Stack
 
-- **Framework**: [Astro](https://astro.build/)
-- **UI Library**: [React](https://reactjs.org/) (hydrated within Astro islands)
+- **Framework**: [Astro](https://astro.build/) v5.7.12
+- **UI Library**: [React](https://reactjs.org/) v19.1.0 (hydrated within Astro islands)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (via `@tailwindcss/vite`)
-- **Deployment**: [Vercel Serverless Functions](https://vercel.com/docs/functions/serverless-functions) (Serverless Functions adapter `@astrojs/vercel/serverless`)
-- **Icons**: [Lucide Icons](https://lucide.dev/) (used with `lucide-astro` and `lucide-react`)
-- **Animation**: [GSAP (GreenSock Animation Platform)](https://greensock.com/gsap/) (optional, listed in dependencies)
+- **Deployment**: [Vercel](https://vercel.com) (using `@astrojs/vercel` adapter)
+- **Icons**: [Lucide Icons](https://lucide.dev/) v0.511.0 (used with `lucide-astro` and `lucide-react`)
+- **Animation**: [GSAP (GreenSock Animation Platform)](https://greensock.com/gsap/) v3.13.0
 
 ## 📂 Project Structure
 
@@ -33,7 +33,7 @@ A brief overview of the key directories and files:
 │   │   └── windows/            # Components for specific "applications" or "exercises"
 │   ├── layouts/                # Astro layout components
 │   │   └── Layout.astro        # Main site layout
-│   ├── pages/                  # Astro pages  (static routes)
+│   ├── pages/                  # Astro pages (server-side rendered routes)
 │   │   └── index.astro         # Homepage
 │   └── styles/                 # Global, Tailwind CSS and modular styles
 ├── astro.config.mjs            # Astro configuration (integrations, Vercel adapter)
@@ -47,29 +47,33 @@ A brief overview of the key directories and files:
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- npm (comes with Node.js)
+- npm or yarn
 
 ### Installation
 
-1.  **Clone the repository:**
+1. **Clone the repository:**
 
-    ```bash
-    git clone <your-repository-url>
-    cd Acads-Case-Studies-Automata
-    ```
+   ```bash
+   git clone <your-repository-url>
+   cd Acads-Case-Studies-Automata
+   ```
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
 ### Running in Development Mode
 
-1.  **Start the development server:**
-    ```bash
-    npm run dev
-    ```
-    This will start the Astro development server, typically at `http://localhost:4321`.
+1. **Start the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+   This will start the Astro development server, typically at `http://localhost:4321`.
 
 ## 🧞 Available Commands
 
@@ -85,16 +89,14 @@ All commands are run from the root of the project in a terminal:
 
 ### 🚀 Deploy to Vercel
 
-Vercel provides instant production previews and auto‑deploys on push:
+The project is configured for automatic deployment on Vercel:
 
-1. **Install Vercel CLI** (if needed): `npm i -g vercel`
-2. **Login**: `vercel login`
-3. **Deploy**:
+1. **Push to your repository** - Vercel will automatically detect changes and deploy
+2. **Manual deployment** (if needed):
    ```bash
    npm run build
    vercel --prod
    ```
-4. **(Optional)** Link your GitHub repo in Vercel dashboard for continuous deploys.
 
 Your site will be available at `https://<your-vercel-project>.vercel.app`.
 
@@ -102,14 +104,14 @@ Your site will be available at `https://<your-vercel-project>.vercel.app`.
 
 - **Desktop-like UI**: The application mimics a Windows XP-style desktop environment with a taskbar, start menu, and draggable/resizable windows.
 - **Interactive Exercises**: Includes interactive "applications" for mathematical concepts like Fibonacci sequence, Pascal's Triangle, and Tribonacci sequence.
-- **Component-Based Architecture**: Leverages Astro for static site generation and React for dynamic UI components.
-- **Tailwind CSS Styling**: Utilizes Tailwind CSS for rapid and consistent styling.
+- **Component-Based Architecture**: Leverages Astro for server-side rendering and React for dynamic UI components.
+- **Tailwind CSS Styling**: Utilizes Tailwind CSS v4 for rapid and consistent styling.
 
 ## 🎨 Styling
 
-- **Tailwind CSS**: The primary styling method. Configuration is in `tailwind.config.mjs`.
+- **Tailwind CSS v4**: The primary styling method. Configuration is in `tailwind.config.mjs`.
 - **Global Styles**: Base styles and Tailwind imports are in `src/styles/global.css`.
-- **CSS Modules**: Used for component-specific styles where needed (e.g., `src/styles/exer.pascal.module.css`).
+- **CSS Modules**: Used for component-specific styles where needed.
 
 ## 📚 Learn More
 
@@ -118,3 +120,4 @@ Your site will be available at `https://<your-vercel-project>.vercel.app`.
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Lucide Icons](https://lucide.dev/)
 - [GSAP Documentation](https://greensock.com/docs/)
+- _Finished and Archived: 5/28/2025 ~M. Siazon_
