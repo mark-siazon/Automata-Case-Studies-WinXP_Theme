@@ -13,19 +13,16 @@ const FibonacciWindow: React.FC<FibonacciWindowProps> = ({ id, onClose }) => {
     <Window
       title="Fibonacci Calculator"
       id={id}
+      taskbarLabel="Fibonacci"
       canMinimize
       canMaximize
       canClose
-      onMinimize={() => {
-        
-      }}
+      onMinimize={() => {}}
       onMaximize={(isMaximized) => {
-        setIsMaximized(isMaximized);  
+        setIsMaximized(isMaximized);
       }}
     >
-      <div className={`w-full ${
-        isMaximized ? "h-full" : "h-[500px]"
-      } p-0`}>
+      <div className={`w-full ${isMaximized ? "h-full" : "h-[500px]"} p-0`}>
         <iframe
           src="https://automata-casestudy.vercel.app/"
           title="External Website"

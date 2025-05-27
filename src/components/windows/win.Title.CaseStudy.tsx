@@ -6,6 +6,7 @@ const TitleWindow: React.FC = () => (
   <Window
     title="Case Study Compilation"
     id="title-window"
+    taskbarLabel="Case Study"
     canMinimize={false}
     canMaximize={false}
     canClose

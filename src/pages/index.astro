@@ -3,17 +3,21 @@ import Background from "../components/home/Background.astro";
 import Taskbar from "../components/home/Taskbar/Taskbar.astro";
 import StartMenu from "../components/home/Taskbar/StartMenu.astro";
 import HomeContent from "../components/home/HomeContent.astro";
+import Layout from "../layouts/Layout.astro";
+
 import "../styles/global.css";
 ---
 
-<Background />
-<div
-  class="flex flex-col items-center justify-center min-h-screen w-full relative z-10"
->
-  <Taskbar />
-  <StartMenu />
-  <HomeContent />
-</div>
+<Layout>
+  <Background />
+  <div
+    class="flex flex-col items-center justify-center min-h-screen w-full relative z-10"
+  >
+    <Taskbar />
+    <StartMenu />
+    <HomeContent />
+  </div>
+</Layout>
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {

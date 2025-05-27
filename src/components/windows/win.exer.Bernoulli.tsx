@@ -50,6 +50,7 @@ const BernoulliWindow: React.FC<BernoulliWindowProps> = ({ id, onClose }) => {
     <Window
       title="Bernoulli Numbers Generator"
       id={id}
+      taskbarLabel="Bernoulli"
       canMinimize
       canMaximize
       canClose

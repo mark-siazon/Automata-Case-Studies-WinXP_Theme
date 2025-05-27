@@ -32,7 +32,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'fibonacci' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" alt="Paint" />
             <span>Fibonacci Sequence Generator</span>
@@ -45,7 +45,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'tribonacci' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" alt="Paint 3D" />
             <span>Tribonacci Sequence Generator</span>
@@ -59,7 +59,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'euclidean' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img
               src="/xp-icon/page-euclidean.ico"
@@ -76,7 +76,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'lucas' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img src="/xp-icon/page-lucas.ico" class="w-5 h-5" alt="Word" />
             <span>Lucas Number Generator</span>
@@ -89,7 +89,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'bernoulli' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img
               src="/xp-icon/page-bernoulli.ico"
@@ -106,7 +106,7 @@ import SocialLink from "./SocialLink.astro";
           <button
             type="button"
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'pascal' }))"
-            class="flex items-center gap-2 w-full h-full text-left"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
             <img
               src="/xp-icon/page-bernoulli.ico"
@@ -159,15 +159,20 @@ import SocialLink from "./SocialLink.astro";
   >
     <button
       class="flex items-center gap-1 font-normal hover:underline cursor-pointer transition"
+      type="button"
+      onclick="window.location.reload()"
     >
       <img src="/xp-icon/logoff.ico" class="w-9 h-9" alt="Log Off" />
       <span>Log Off</span>
     </button>
-    <button
+    <a
+      href="https://github.com/UMak-Gilas-Tech/Case-Studies-Automata"
+      target="_blank"
+      rel="noopener noreferrer"
       class="flex items-center gap-1 font-normal hover:underline cursor-pointer transition"
     >
       <img src="/xp-icon/shutdown.ico" class="w-9 h-9" alt="Turn Off" />
       <span>Repository Link</span>
-    </button>
+    </a>
   </div>
 </div>

@@ -11,21 +11,18 @@ const EuclideanWindow: React.FC<FibonacciWindowProps> = ({ id, onClose }) => {
   const [isMaximized, setIsMaximized] = React.useState(false);
   return (
     <Window
-      title="Euclidean Calculator"
+      title="Euclidean Algorithm"
       id={id}
+      taskbarLabel="Euclidean"
       canMinimize
       canMaximize
       canClose
-      onMinimize={() => {
-        
-      }}
+      onMinimize={() => {}}
       onMaximize={(isMaximized) => {
-        setIsMaximized(isMaximized);  
+        setIsMaximized(isMaximized);
       }}
     >
-      <div className={`w-full ${
-        isMaximized ? "h-full" : "h-[500px]"
-      } p-0`}>
+      <div className={`w-full ${isMaximized ? "h-full" : "h-[500px]"} p-0`}>
         <iframe
           src="https://automata-casestudy.vercel.app/?mode=euc"
           title="External Website"

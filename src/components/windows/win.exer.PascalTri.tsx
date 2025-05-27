@@ -146,6 +146,7 @@ const PascalWindow: React.FC<PascalWindowProps> = ({ id }) => {
     <Window
       id={id}
       title="Pascal Triangle Generator"
+      taskbarLabel="Pascal"
       canMinimize
       canMaximize
       canClose

@@ -8,6 +8,7 @@ import minimizeWindowIcon from "../../assets/win.Minimize.Icon.svg?url";
 export type WindowProps = {
   title: string;
   id: string;
+  taskbarLabel?: string;
   canMinimize?: boolean;
   canMaximize?: boolean;
   canClose?: boolean;
@@ -20,6 +21,7 @@ export type WindowProps = {
 const Window: React.FC<WindowProps> = ({
   title,
   id,
+  taskbarLabel,
   canMinimize = true,
   canMaximize = true,
   canClose = true,
@@ -41,13 +43,13 @@ const Window: React.FC<WindowProps> = ({
     const wm = wmRef.current;
 
     if (windowRef.current) {
-      wm.initWindow(id);
+      wm.initWindow(id, taskbarLabel);
     }
 
     const onResize = () => wm.updateSnapPoints();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [id]);
+  }, [id, taskbarLabel]);
 
   const minimize = () => {
     windowRef.current?.classList.add("minimized");

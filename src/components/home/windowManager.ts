@@ -13,6 +13,7 @@ interface WindowState {
   windowId: string;
   title: string;
   wasMaximized: boolean;
+  taskbarLabel?: string;
 }
 
 // Window snapping configuration
@@ -40,7 +41,7 @@ export class WindowManager {
   private minimizedWindows: Map<string, WindowState> = new Map();
 
   // Initialize window dragging and controls
-  public initWindow(windowId: string): void {
+  public initWindow(windowId: string, taskbarLabel?: string): void {
     const window = document.getElementById(windowId);
     const titleBar = window?.querySelector(".bg-gradient-to-r");
     if (!window || !titleBar) return;
@@ -59,6 +60,7 @@ export class WindowManager {
       windowId,
       title: window.querySelector(".window-title")?.textContent || windowId,
       wasMaximized: false,
+      taskbarLabel,
     };
 
     // Start dragging on mousedown
@@ -182,12 +184,29 @@ export class WindowManager {
     );
     if (existingButton) return;
 
+    // Map windowId or taskbarLabel to icon
+    const iconMap: Record<string, string> = {
+      fibonacci: "/xp-icon/page-nacci.ico",
+      tribonacci: "/xp-icon/page-nacci.ico",
+      euclidean: "/xp-icon/page-euclidean.ico",
+      lucas: "/xp-icon/page-lucas.ico",
+      bernoulli: "/xp-icon/page-bernoulli.ico",
+      pascal: "/xp-icon/page-bernoulli.ico",
+      // fallback icon
+    };
+    // Try to infer the key from windowId or taskbarLabel
+    let key = state.windowId.split("-")[0].toLowerCase();
+    if (!(key in iconMap) && state.taskbarLabel) {
+      key = state.taskbarLabel.toLowerCase();
+    }
+    const iconSrc = iconMap[key] || "/xp-icon/page-nacci.ico";
+
     const button = document.createElement("button");
     button.className = `
       flex items-center px-4 py-1
       bg-gradient-to-b from-[#7ec6fa] to-[#3b6eb1]
       border border-[#2056a5]
-      rounded-lg
+      rounded-md
       shadow-[inset_0_1px_0_0_#fff,0_1px_2px_#2056a5]
       focus:outline-none
       active:translate-y-px
@@ -202,11 +221,13 @@ export class WindowManager {
       hover:to-[#4b7ec2]
       active:from-[#6ebbf9]
       active:to-[#2b5ea0]
+      cursor-pointer
     `;
     button.dataset.windowId = state.windowId;
     button.innerHTML = `
+      <img src="${iconSrc}" class="w-5 h-5 mr-2" alt="icon" />
       <span class="text-white font-medium text-sm drop-shadow-[0_1px_0_#2056a5]">
-        ${state.title}
+        ${state.taskbarLabel || state.title}
       </span>
     `;
 

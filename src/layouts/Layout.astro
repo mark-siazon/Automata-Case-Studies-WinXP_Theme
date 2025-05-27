@@ -3,12 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/xp-btn-logo.png" type="image/png" sizes="32x32" />
+    <link rel="shortcut icon" href="/xp-btn-logo.png" />
+    <link rel="apple-touch-icon" href="/xp-btn-logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>Automata | Case Study - Compilations</title>
     <link rel="stylesheet" href="../styles/global.css" />
   </head>
   <body>
     <slot />
+    <script>
+      function playStartupSound() {
+        const audio = new Audio("/xp-startup.mp3");
+        audio.volume = 0.5;
+        audio.play().catch(() => {
+          // If blocked, wait for user interaction
+          const tryPlay = () => {
+            audio.play();
+            window.removeEventListener("click", tryPlay);
+            window.removeEventListener("keydown", tryPlay);
+          };
+          window.addEventListener("click", tryPlay);
+          window.addEventListener("keydown", tryPlay);
+        });
+      }
+      window.addEventListener("DOMContentLoaded", playStartupSound);
+    </script>
   </body>
 </html>
