@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import FibonacciWindow from "./win.exer.Fibonacci";
 import TribonacciWindow from "./win.exer.Tribonacci";
+import CollatzWindow from "./win.exer.Collatz";
 import PascalWindow from "./win.exer.PascalTri";
 import LucasWindow from "./win.exer.Lucas";
 import EuclideanWindow from "./win.exer.Euclidean";
@@ -15,10 +16,11 @@ const WINDOW_COMPONENTS: Record<
 > = {
   fibonacci: FibonacciWindow,
   tribonacci: TribonacciWindow,
+  collatz: CollatzWindow,
   pascal: PascalWindow,
   lucas: LucasWindow,
   euclidean: EuclideanWindow,
-  bernoulli: BernoulliWindow
+  bernoulli: BernoulliWindow,
   // …add more here…
 };
 

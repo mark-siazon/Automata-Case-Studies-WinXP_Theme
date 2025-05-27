@@ -47,8 +47,21 @@ import SocialLink from "./SocialLink.astro";
             onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'tribonacci' }))"
             class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
           >
-            <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" alt="Paint 3D" />
+            <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" />
             <span>Tribonacci Sequence Generator</span>
+            <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
+          </button>
+        </li>
+        <li
+          class="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 cursor-pointer"
+        >
+          <button
+            type="button"
+            onclick="window.dispatchEvent(new CustomEvent('open-window', { detail: 'collatz' }))"
+            class="flex items-center gap-2 w-full h-full text-left cursor-pointer"
+          >
+            <img src="/xp-icon/page-nacci.ico" class="w-5 h-5" />
+            <span>Collatz Sequence Generator</span>
             <span class="ml-auto text-[#388e3c] font-bold">&gt;</span>
           </button>
         </li>
