@@ -6,24 +6,23 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "deploy": "npm run build && gh-pages -d dist"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.7",
-    "@astrojs/vercel": "^8.1.4",
+    "@astrojs/vercel": "^8.0.4",
     "@tailwindcss/vite": "^4.1.6",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "astro": "^5.7.12",
     "gsap": "^3.13.0",
-    "lucide-astro": "^0.510.0",
-    "lucide-react": "^0.510.0",
+    "lucide-astro": "^0.511.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.6"
   },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
+  "overrides": {
+    "path-to-regexp": "^6.2.2"
   }
 }
