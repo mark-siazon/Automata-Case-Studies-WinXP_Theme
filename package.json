@@ -9,12 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.7",
-    "@astrojs/vercel": "^8.0.4",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/vercel": "^8.2.11",
     "@tailwindcss/vite": "^4.1.6",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
-    "astro": "^5.7.12",
+    "astro": "^5.18.2",
     "gsap": "^3.13.0",
     "lucide-astro": "^0.511.0",
     "lucide-react": "^0.511.0",
@@ -23,6 +23,12 @@
     "tailwindcss": "^4.1.6"
   },
   "overrides": {
-    "path-to-regexp": "^6.2.2"
+    "path-to-regexp": "^6.2.2",
+    "sharp": "^0.35.5"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "sharp@0.35.5": true,
+    "@tailwindcss/oxide@4.1.7": true
   }
 }
