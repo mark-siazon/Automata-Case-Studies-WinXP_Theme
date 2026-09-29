@@ -16,7 +16,7 @@
     "@types/react-dom": "^19.1.5",
     "astro": "^5.18.2",
     "gsap": "^3.13.0",
-    "lucide-astro": "^0.511.0",
+    "lucide-astro": "^0.556.0",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
