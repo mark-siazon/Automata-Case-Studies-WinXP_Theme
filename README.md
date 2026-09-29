@@ -100,6 +100,24 @@ The project is configured for automatic deployment on Vercel:
 
 Your site will be available at `https://<your-vercel-project>.vercel.app`.
 
+### 📊 Web Analytics & Speed Insights (free)
+
+This project uses the **standard (free) tier** only — `@vercel/analytics/astro` and `@vercel/speed-insights/astro` in `Layout.astro`. It does **not** use Web Analytics Plus, Speed Insights Plus, server-side custom events, or any paid Vercel observability add-ons.
+
+| Feature | Hobby plan (free) | If you exceed the limit |
+| --- | --- | --- |
+| [Web Analytics](https://vercel.com/docs/analytics/limits-and-pricing) | 50,000 pageview events / month | Collection pauses; **no charge** on Hobby |
+| [Speed Insights](https://vercel.com/docs/speed-insights/limits-and-pricing) | 10,000 events / team / 30 days | Collection pauses 14 days; **no charge** on Hobby |
+
+The npm packages are free to install. You only pay if you upgrade to Pro and buy add-ons — **do not enable “Plus” toggles** in the Vercel dashboard unless you intend to pay.
+
+After deploying on a **Hobby (free) team**, enable once in the project dashboard:
+
+1. **Project → Analytics** → enable **Web Analytics** (not Web Analytics Plus)
+2. **Project → Speed Insights** → enable **Speed Insights** (not Speed Insights Plus)
+
+Data appears after the next production deployment.
+
 ## ✨ Key Features
 
 - **Desktop-like UI**: The application mimics a Windows XP-style desktop environment with a taskbar, start menu, and draggable/resizable windows.
