@@ -17,6 +17,8 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.3.5",
     "gsap": "^3.13.0",
     "lucide-astro": "^0.556.0",

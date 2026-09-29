@@ -1,3 +1,9 @@
+---
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+// Free-tier only: standard Web Analytics + Speed Insights (not Plus add-ons).
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,9 +15,11 @@
     <meta name="generator" content={Astro.generator} />
     <title>Automata | Case Study - Compilations</title>
     <link rel="stylesheet" href="../styles/global.css" />
+    <Analytics />
   </head>
   <body>
     <slot />
+    <SpeedInsights />
     <script>
       function playStartupSound() {
         const audio = new Audio("/xp-startup.mp3");
