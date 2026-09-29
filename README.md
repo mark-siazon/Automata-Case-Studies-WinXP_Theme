@@ -2,14 +2,18 @@
 
 This project is a **Windows XP–style desktop** web application built with **Astro**, **React**, and **Tailwind CSS v4**. It runs as a server-side rendered application with **dynamic React islands**, and is deployed via **Vercel** for zero‑config CI/CD.
 
+- **Live demo:** [acads-case-studies-automata.vercel.app](https://acads-case-studies-automata.vercel.app/)
+- **Portfolio case study:** [marksiazon.dev/projects/automata-winxp](https://www.marksiazon.dev/projects/automata-winxp)
+
 ## 🚀 Tech Stack
 
-- **Framework**: [Astro](https://astro.build/) v5.7.12
+- **Framework**: [Astro](https://astro.build/) v7.3.5
 - **UI Library**: [React](https://reactjs.org/) v19.1.0 (hydrated within Astro islands)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (via `@tailwindcss/vite`)
 - **Deployment**: [Vercel](https://vercel.com) (using `@astrojs/vercel` adapter)
-- **Icons**: [Lucide Icons](https://lucide.dev/) v0.511.0 (used with `lucide-astro` and `lucide-react`)
+- **Icons**: [Lucide Icons](https://lucide.dev/) via `@lucide/astro` and `lucide-react`
 - **Animation**: [GSAP (GreenSock Animation Platform)](https://greensock.com/gsap/) v3.13.0
+- **Quality**: GitHub Actions CI (`npm run build`), Dependabot, `@vercel/analytics` + `@vercel/speed-insights` (free tier)
 
 ## 📂 Project Structure
 
@@ -46,8 +50,8 @@ A brief overview of the key directories and files:
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- npm or yarn
+- [Node.js](https://nodejs.org/) v22 or higher (see `engines` in `package.json`)
+- npm
 
 ### Installation
 
