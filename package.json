@@ -2,6 +2,9 @@
   "name": "acads-case-studies-automata",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,26 +12,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^8.2.11",
-    "@tailwindcss/vite": "^4.1.6",
+    "@astrojs/react": "^7.0.0",
+    "@astrojs/vercel": "^11.0.11",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
-    "astro": "^5.18.2",
+    "astro": "^7.3.5",
     "gsap": "^3.13.0",
-    "lucide-astro": "^0.511.0",
-    "lucide-react": "^0.511.0",
+    "lucide-astro": "^0.556.0",
+    "lucide-react": "^0.556.0",
+    "oxc-transform-react": "^0.145.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.6"
+    "tailwindcss": "^4.3.3"
   },
   "overrides": {
     "path-to-regexp": "^6.2.2",
     "sharp": "^0.35.5"
-  },
-  "allowScripts": {
-    "esbuild@0.28.2": true,
-    "sharp@0.35.5": true,
-    "@tailwindcss/oxide@4.1.7": true
   }
 }
