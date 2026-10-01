@@ -224,12 +224,18 @@ export class WindowManager {
       cursor-pointer
     `;
     button.dataset.windowId = state.windowId;
-    button.innerHTML = `
-      <img src="${iconSrc}" class="w-5 h-5 mr-2" alt="icon" />
-      <span class="text-white font-medium text-sm drop-shadow-[0_1px_0_#2056a5]">
-        ${state.taskbarLabel || state.title}
-      </span>
-    `;
+
+    const icon = document.createElement("img");
+    icon.src = iconSrc;
+    icon.className = "w-5 h-5 mr-2";
+    icon.alt = "icon";
+
+    const label = document.createElement("span");
+    label.className =
+      "text-white font-medium text-sm drop-shadow-[0_1px_0_#2056a5]";
+    label.textContent = state.taskbarLabel || state.title;
+
+    button.append(icon, label);
 
     button.addEventListener("click", () => {
       const window = document.getElementById(state.windowId);
