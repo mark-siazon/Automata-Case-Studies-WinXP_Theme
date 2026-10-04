@@ -5,3 +5,9 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # @astrojs/react@7 accepts oxc-transform-react ^0.145.0 only.
+      # 0.152 fails npm ci with ERESOLVE, so Dependabot must not reopen it.
+      - dependency-name: oxc-transform-react
+        versions:
+          - ">=0.146.0"
