@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/react": "^7.1.2",
     "@lucide/astro": "^1.57.0",
-    "@tailwindcss/vite": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vercel/analytics": "^2.0.1",
