@@ -50,7 +50,7 @@ A brief overview of the key directories and files:
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v22 or higher (see `engines` in `package.json`)
+- [Node.js](https://nodejs.org/) v22.23.4 or higher (see `engines` in `package.json`)
 - npm
 
 ### Installation
@@ -64,10 +64,13 @@ A brief overview of the key directories and files:
 
 2. **Install dependencies:**
    ```bash
-   npm install
-   # or
-   yarn install
+   npm ci
    ```
+
+   Use the committed npm lockfile for reproducible installs. When updating
+   `@astrojs/react`, keep `oxc-transform-react` compatible with both its peer
+   range and the Vite React plugin's peer range. Regenerate `package-lock.json`
+   with `npm install --package-lock-only`, then verify `npm ci` and `npm run build`.
 
 ### Running in Development Mode
 
